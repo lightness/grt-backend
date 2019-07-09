@@ -2,22 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const axios = require('axios');
-
-const GrtService = require('./grt-service');
+const { grt } = require('github-repo-tools');
 
 const GITHUB_CLIENT_ID = '8b20e17f2c8c05c29536';
 const GITHUB_CLIENT_SECRET = '17587914489ea7db1de22d75bf8c93c669ad4255';
 
 const app = express();
-const grtService = new GrtService();
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-
-app.get('/', function (req, res) {
-  res.send('Hello');
-})
 
 app.post('/api/grt', function (req, res) {
   const { token, t } = req.body;
@@ -27,7 +21,7 @@ app.post('/api/grt', function (req, res) {
     res.send("Unauthorized");
   }
 
-  grtService.call(req.body)
+  grt(req.body)
     .then(response => {
       res.send(response);
     })
@@ -65,17 +59,6 @@ app.post('/api/token', (req, res) => {
     res.send(err);
   })
 })
-
-// app.get('/auth/github',
-//   passport.authenticate('github')
-// );
-
-// app.get('/auth/github/callback',
-//   passport.authenticate('github', { failureRedirect: '/' }),
-//   function (req, res) {
-//     res.send(JSON.stringify({ token: req.user.accessToken }));
-//   }
-// );
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!');
