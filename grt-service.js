@@ -51,7 +51,7 @@ class GrtService {
   call(options) {
     try {
       const grtOptions = this.mapOptions(options);
-
+      console.log(JSON.stringify(grtOptions));
       return this.execute(grtOptions);
     }
     catch (e) {
@@ -71,7 +71,11 @@ class GrtService {
         throw new Error(`Wrong options passed: ${property}`);
       }
 
-      grtOptions.push(`--${item.param}`);
+      if (item.alias === property) {
+        grtOptions.push(`-${property}`);
+      } else {
+        grtOptions.push(`--${property}`);
+      }
 
       if (item.type === 'string') {
         grtOptions.push(String(options[property]));

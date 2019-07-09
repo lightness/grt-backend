@@ -20,16 +20,14 @@ app.get('/', function (req, res) {
 })
 
 app.post('/api/grt', function (req, res) {
-  if (!req.isAuthenticated()) {
+  const { token, t } = req.body;
+
+  if (!token && !t) {
     res.status(401);
-    res.send(JSON.stringify({ error: "Unauthorized" }));
-    return;
+    res.send("Unauthorized");
   }
 
-  const token = req.user.accessToken;
-  const { body } = req;
-
-  grtService.call({ token, ...body })
+  grtService.call(req.body)
     .then(response => {
       res.send(response);
     })
