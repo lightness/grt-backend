@@ -14,8 +14,7 @@ app.post('/api/grt', function (req, res) {
   const { token, t } = req.body;
 
   if (!token && !t) {
-    res.status(401);
-    res.send("Unauthorized");
+    res.status(401).send('Unauthorized');
   }
 
   grt(req.body)
@@ -23,14 +22,13 @@ app.post('/api/grt', function (req, res) {
       res.send(response);
     })
     .catch(err => {
-      console.log(err);
-      res.status(500);
-      res.send(err);
+      console.error('Error during communication with github-repo-tools');
+      console.error(err);
+      res.status(500).send('Something went wrong');
     });
 });
 
 app.post('/api/token', (req, res) => {
-  console.log('api-token', req.body);
   const { code, state } = req.body;
 
   const data = {
@@ -40,7 +38,7 @@ app.post('/api/token', (req, res) => {
     state,
   };
 
-  console.log('data', data);
+  console.log('Github oauth access token payload', data);
 
   axios({
     method: 'post',
@@ -48,12 +46,9 @@ app.post('/api/token', (req, res) => {
     headers: { 'Accept': 'application/json' },
     data,
   }).then(response => {
-    console.log('> then', response.data);
     res.send(JSON.stringify(response.data));
   }).catch(err => {
-    console.log('> catch');
-    res.status(500);
-    res.send(err);
+    res.status(500).send(err);
   })
 })
 
