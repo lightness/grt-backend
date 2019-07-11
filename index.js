@@ -4,9 +4,6 @@ const bodyParser = require('body-parser');
 const axios = require('axios');
 const { grt } = require('github-repo-tools');
 
-const GITHUB_CLIENT_ID = '8b20e17f2c8c05c29536';
-const GITHUB_CLIENT_SECRET = '17587914489ea7db1de22d75bf8c93c669ad4255';
-
 const app = express();
 
 app.use(cors());
@@ -37,8 +34,8 @@ app.post('/api/token', (req, res) => {
   const { code, state } = req.body;
 
   const data = {
-    client_id: GITHUB_CLIENT_ID,
-    client_secret: GITHUB_CLIENT_SECRET,
+    client_id: process.env.GITHUB_CLIENT_ID,
+    client_secret: process.env.GITHUB_CLIENT_SECRET,
     code,
     state,
   };
