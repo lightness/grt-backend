@@ -657,10 +657,10 @@ get-stream@^4.0.0:
   dependencies:
     pump "^3.0.0"
 
-github-repo-tools@2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/github-repo-tools/-/github-repo-tools-2.3.2.tgz#d0a20d33913a44031be3d89b3833993d748f33b7"
-  integrity sha512-dBFet59klXbQosAekYpmrTngx3Vc0eYA0Hze5Zl95xldgqK9OaRL5Ztuqnzz5VSUaoMNEeL+HHt9BMd8tZmNlQ==
+github-repo-tools@^2.4.1:
+  version "2.4.1"
+  resolved "https://registry.yarnpkg.com/github-repo-tools/-/github-repo-tools-2.4.1.tgz#9c3e4b98d8bebba29b16317de8d6a2631d9e2e59"
+  integrity sha512-i0wHtFNI1BwM4QglNuec7/WX+CpRmWO6pPSikvJ9gI3Nr+R1/SLfiO6o/pNbTPfhaUptzk0SGkRHqdKq6oGFoA==
   dependencies:
     "@nestjs/common" "^6.3.1"
     "@nestjs/core" "^6.2.0"
