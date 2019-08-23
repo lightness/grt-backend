@@ -17,8 +17,13 @@ app.post('/api/grt', function (req, res) {
     res.status(401).send('Unauthorized');
   }
 
+  console.log(`Request:`);
+  console.log(req.body);
+
   grt(req.body)
     .then(response => {
+      console.log(`Response:`);
+      console.log(response);
       res.send(response);
     })
     .catch(err => {
